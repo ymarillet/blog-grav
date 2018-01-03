@@ -1,0 +1,27 @@
+version: "3.2"
+
+services:
+  nginx:
+    env_file: nginx/.env
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./volumes/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./volumes/logs/nginx:/var/log/nginx
+      - ../:/opt/sources/:ro
+    networks:
+      - "reverseproxy"
+      - "default"
+
+  php:
+    build: ./php
+    working_dir: /opt/sources
+    restart: unless-stopped
+    volumes:
+      - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
+      - ../:/opt/sources/
+
+networks:
+  reverseproxy:
+    external:
+      name: "reverseproxy_reverseproxy"
