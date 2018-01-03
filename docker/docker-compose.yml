@@ -8,28 +8,26 @@ services:
     volumes:
       - ./volumes/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./volumes/logs/nginx:/var/log/nginx
-      - sources:/opt/sources/:ro
+      - ..:/opt/sources:ro
     networks:
       - "reverseproxy"
       - "default"
 
   php:
     build: ./php
-    working_dir: /opt/sources
     restart: unless-stopped
     volumes:
       - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
-      - sources:/opt/sources/
+      - ..:/opt/sources
 
-  data:
-    env_file: data/.env
-    build: ./data
+  install:
+    build: ./php
     restart: "no"
     volumes:
-      - sources:/opt/sources/
-
-volumes:
-  sources:
+      - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
+      - ..:/opt/sources
+    entrypoint: ''
+    command: ["./run.sh"]
 
 networks:
   reverseproxy:
