@@ -6,7 +6,7 @@ services:
     image: nginx:alpine
     restart: unless-stopped
     volumes:
-      - ./volumes/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./volumes/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./volumes/logs/nginx:/var/log/nginx
       - sources:/opt/sources/:ro
     networks:
@@ -14,7 +14,8 @@ services:
       - "default"
 
   php:
-    image: php:fpm-alpine
+    build: ./php
+    working_dir: /opt/sources
     restart: unless-stopped
     volumes:
       - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
