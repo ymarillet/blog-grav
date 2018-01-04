@@ -18,14 +18,18 @@ services:
     restart: unless-stopped
     volumes:
       - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./volumes/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
       - ..:/opt/sources
+    user: "${UID}:${GID}"
 
-  install:
+  cli:
     build: ./php
     restart: "no"
     volumes:
       - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./volumes/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
       - ..:/opt/sources
+    user: "${UID}:${GID}"
     entrypoint: ''
     command: ["./run.sh"]
 
