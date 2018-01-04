@@ -1,5 +1,6 @@
 ---
 title: 'Lancement du blog, premier billet. Ajime !'
+published: true
 date: '08:00 02/01/2018'
 taxonomy:
     category:
