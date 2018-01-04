@@ -34,6 +34,4 @@ Il va aussi falloir que je bosse sur le design et fonctionnalités du blog:
   * Et comment on fait, t'as pas de système de commentaires !
     * Gné, j'ai un email. T'auras qu'à regarder la page About me. Quand je l'aurai créée.
 
-Un prochain article: pourquoi j'ai choisi Grav et mes galères avec Netlify 
-
-test update
+Un prochain article: pourquoi j'ai choisi Grav et mes galères avec Netlify
