@@ -1,9 +1,11 @@
 ---
-title: Lancement du blog, premier billet. Ajime !
-date: 08:00 02/01/2018 
+title: 'Lancement du blog, premier billet. Ajime !'
+date: '08:00 02/01/2018'
 taxonomy:
-    category: blog
-    tag: [config]
+    category:
+        - blog
+    tag:
+        - config
 ---
 
 Ca y est, je me suis enfin décidé à créer mon blog pour cette année 2018.
@@ -32,3 +34,5 @@ Il va aussi falloir que je bosse sur le design et fonctionnalités du blog:
     * Gné, j'ai un email. T'auras qu'à regarder la page About me. Quand je l'aurai créée.
 
 Un prochain article: pourquoi j'ai choisi Grav et mes galères avec Netlify 
+
+test update
