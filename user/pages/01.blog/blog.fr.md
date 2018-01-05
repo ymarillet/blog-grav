@@ -1,5 +1,5 @@
 ---
-title: Home
+title: Accueil
 blog_url: blog
 body_classes: header-image fullwidth
 
@@ -16,7 +16,7 @@ content:
     pagination: true
 
 feed:
-    description: Sample Blog Description
+    description: Bienvenue sur mon blog tech & lifestyle, partage de connaissances
     limit: 10
 
 pagination: true
