@@ -1,7 +1,7 @@
 ---
 title: 'Lancement du blog, premier billet. Ajime !'
 published: true
-date: '08:00 02/01/2018'
+date: '01-02-2018 08:00'
 taxonomy:
     category:
         - blog
@@ -32,6 +32,6 @@ Il va aussi falloir que je bosse sur le design et fonctionnalités du blog:
 * Ajouter des tags cohérents pour s'y retrouver (enfin, si je continue à écrire des choses ...)
 * Si vous avez des idées, n'hésitez pas à m'en faire part !
   * Et comment on fait, t'as pas de système de commentaires !
-    * Gné, j'ai un email. T'auras qu'à regarder la page About me. Quand je l'aurai créée.
+     * Gné, j'ai un email. T'auras qu'à regarder la page About me. Quand je l'aurai créée.
 
 Un prochain article: pourquoi j'ai choisi Grav et mes galères avec Netlify 
