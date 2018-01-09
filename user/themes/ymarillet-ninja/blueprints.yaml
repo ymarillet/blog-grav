@@ -1,6 +1,6 @@
 name: Ymarillet.ninja
 version: 0.1.0
-description: Custom theme for ymarillet.ninja
+description: "Custom theme for ymarillet.ninja"
 icon: rebel
 author:
   name: ymarillet
@@ -9,8 +9,21 @@ homepage: https://ymarillet.ninja
 demo: https://ymarillet.ninja
 keywords: grav, theme
 bugs: https://github.com/ymarillet/blog-grav/issues
-readme: ~
 license: proprietary
 
 dependencies:
   - bootstrapper
+
+form:
+  validation: strict
+  fields:
+    dropdown.enabled:
+        type: toggle
+        label: Dropdown in navbar
+        highlight: 1
+        default: 1
+        options:
+          1: Enabled
+          0: Disabled
+        validate:
+          type: bool

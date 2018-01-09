@@ -1,5 +1,5 @@
 # v0.1.0
-##  01/06/2018
+##  07-01-2018
 
-1. [](#new)
-    * ChangeLog started...
+1. 
+    * From Bootstrap v1.6.0

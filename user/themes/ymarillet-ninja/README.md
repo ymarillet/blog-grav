@@ -4,4 +4,4 @@ The **Ymarillet Ninja** Theme is for [Grav CMS](http://github.com/getgrav/grav).
 
 ## Description
 
-CsusCustomTh Theme
+Custom theme

@@ -1,8 +1,2 @@
-streams:
- schemes:
-   theme:
-     type: ReadOnlyStream
-     prefixes:
-       '':
-         - user/themes/bootstrap
-         - user/themes/ymarillet-ninja
+dropdown:
+  enabled: false
