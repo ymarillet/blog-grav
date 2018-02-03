@@ -14,7 +14,14 @@ RUN apk --update --no-cache add \
 	curl-dev \
 	bash \
 	bash-completion \
-	git
+    yaml \
+    nano \
+    tar \
+    make \
+    libffi-dev \
+    ruby ruby-irb ruby-rake ruby-io-console ruby-bigdecimal ruby-json ruby-bundler ruby-dev ruby-rdoc \
+    libstdc++ tzdata ca-certificates \
+    && gem install sass --no-user-install
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

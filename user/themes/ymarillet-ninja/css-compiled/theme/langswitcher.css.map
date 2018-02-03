@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,sBAAuB;EACrB,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,MAAM;EACf,OAAO,EAAE,YAAY;EACrB,UAAU,EAAE,IAAI;EAEhB,0BAAI;IACF,OAAO,EAAE,YAAY",
+"sources": ["../../scss/theme/langswitcher.scss"],
+"names": [],
+"file": "langswitcher.css"
+}

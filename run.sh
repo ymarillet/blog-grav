@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 bin/grav install \
- && bin/gpm -n install admin git-sync langswitcher bootstrap
+ && bin/gpm -n install admin git-sync langswitcher bootstrap twig-extensions

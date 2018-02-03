@@ -13,15 +13,14 @@
     {% endif  %}
 
 	{% block content %}
-        <div class="header">
-            <div class="container">
-                {{ page.content }}
-            </div>
-        </div>
+        {#<div class="header">#}
+            {#<div class="container">#}
+                {#{{ page.content }}#}
+            {#</div>#}
+        {#</div>#}
         <div class="container">
             <div class="row">
-                <div class="col-sm-8 blog-main">
-
+                <div class="{#col-sm-8 #}blog-main">
                     {% if config.plugins.breadcrumbs.enabled %}
                         {% include 'partials/breadcrumbs.html.twig' %}
                     {% endif %}
@@ -29,12 +28,11 @@
                     {% for child in collection %}
                         {% include 'partials/blog_item.html.twig' with {'page':child, 'truncate':true} %}
                     {% endfor %}
-
                 </div>
 
-        		<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-       				{% include 'partials/sidebar.html.twig' with {'blog':page} %}
-        		</div>
+        		{#<div class="col-sm-3 col-sm-offset-1 blog-sidebar">#}
+       				{#{% include 'partials/sidebar.html.twig' with {'blog':page} %}#}
+        		{#</div>#}
             </div>
         </div>
 	{% endblock %}

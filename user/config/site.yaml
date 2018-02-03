@@ -7,9 +7,9 @@ taxonomies:
   - category
   - tag
 metadata:
-  description: 'Bienvenue sur mon blog tech & lifestyle, partage de connaissances'
+  description: 'Bienvenue sur mon blog tech & lifestyle ymarillet.ninja, partage de connaissances'
 summary:
-  enabled: true
+  enabled: false
   format: short
   size: 300
   delimiter: '==='

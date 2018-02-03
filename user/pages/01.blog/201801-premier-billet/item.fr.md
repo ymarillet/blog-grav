@@ -11,8 +11,6 @@ taxonomy:
 
 Ca y est, je me suis enfin décidé à créer mon blog pour cette année 2018.
 
-===
-
 Première question que je et que vous allez me poser: un blog à propos de quoi ? Hé bien un blog à propos d'un peu tout. Je ne compte pas en faire un Skyblog où je vais vous raconter la vie de mes chats ou encore vous détailler la vie d'un people; l'idée du blog serait plutôt de transmettre mes connaissances, dans tous les domaines, au fur et à mesure que je les apprends, afin que d'autres internautes puissent se servir de cette expérience qui ne demande qu'à être partagée et même enrichie, via commentaires ou liens vers d'autres articles/blogs similaires, etc.
 
 A propos de tout mais pas de tout, ça reste vague ... précisons un peu:

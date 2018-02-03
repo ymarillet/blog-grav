@@ -36,6 +36,10 @@
                     </li>
                 {% endfor %}
 
+                {% if config.plugins.langswitcher.enabled %}
+                    <li>{% include 'partials/langswitcher.html.twig' %}</li>
+                {% endif %}
+
                 {% if config.plugins.login.enabled and grav.user.username %}
                     <li><i class="fa fa-lock"></i> {% include 'partials/login-status.html.twig' %}</li>
                 {% endif %}

@@ -1,0 +1,10 @@
+en:
+  CONTINUE_READING: "Continue reading"
+  THEME_COPYRIGHT: 'Bootstrap Theme with customizations for %s'
+  NEXT_POST: 'Next post'
+  PREVIOUS_POST: 'Previous post'
+fr:
+  CONTINUE_READING: "Lire la suite"
+  THEME_COPYRIGHT: 'Theme Bootstrap avec modifications maison pour %s'
+  NEXT_POST: 'Billet suivant'
+  PREVIOUS_POST: 'Billet précédent'

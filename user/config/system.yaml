@@ -1,12 +1,10 @@
 absolute_urls: false
-timezone: ''
-default_locale: null
+timezone: Europe/Paris
 param_sep: ':'
 wrapped_site: false
 reverse_proxy_setup: false
 force_ssl: false
 force_lowercase_urls: true
-custom_base_url: ''
 username_regex: '^[a-z0-9_-]{3,16}$'
 pwd_regex: '.{8,}'
 intl_enabled: true
@@ -14,12 +12,12 @@ languages:
   supported:
     - fr
     - en
-  include_default_lang: true
+  include_default_lang: false
   translations: true
-  translations_fallback: true
+  translations_fallback: false
   session_store_active: false
-  http_accept_language: false
-  override_locale: false
+  http_accept_language: true
+  override_locale: true
 home:
   alias: /blog
   hide_in_urls: false
@@ -37,14 +35,14 @@ pages:
   publish_dates: true
   process:
     markdown: true
-    twig: false
+    twig: true
   twig_first: false
   never_cache_twig: false
   events:
     page: true
     twig: true
   markdown:
-    extra: false
+    extra: true
     auto_line_breaks: false
     auto_url_links: false
     escape_markup: false
@@ -59,10 +57,8 @@ pages:
     - json
     - rss
     - atom
-  append_url_extension: ''
   expires: 604800
-  cache_control: null
-  last_modified: false
+  last_modified: true
   etag: false
   vary_accept_encoding: false
   redirect_default_route: false
@@ -70,6 +66,7 @@ pages:
   redirect_trailing_slash: true
   ignore_files:
     - .DS_Store
+    - thumbs.db
   ignore_folders:
     - .git
     - .idea
@@ -90,9 +87,7 @@ cache:
   cli_compatibility: false
   lifetime: 604800
   gzip: false
-  allow_webserver_gzip: false
-  redis:
-    socket: false
+  allow_webserver_gzip: true
 twig:
   cache: true
   debug: true
@@ -131,8 +126,6 @@ images:
   auto_fix_orientation: false
 media:
   enable_media_timestamp: false
-  unsupported_inline_types: {  }
-  allowed_fallback_types: {  }
   auto_metadata_exif: false
   upload_limit: 8388608
 session:
@@ -143,10 +136,8 @@ session:
   secure: false
   httponly: true
   split: true
-  path: null
 gpm:
   releases: testing
-  proxy_url: null
   method: auto
   verify_peer: true
   official_gpm_only: true
