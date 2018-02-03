@@ -1,5 +1,5 @@
 <span class="list-blog-date">
     <time  datetime="{{ date|date("c") }}">
-        <i class="fa fa-calendar"></i> <span>{{ date|localizeddate('long', 'short') }}</span>
+        <i class="fa fa-calendar"></i> <span>{{ date|localizeddate('long', 'short', grav.language.getActive) }}</span>
     </time>
 </span>
