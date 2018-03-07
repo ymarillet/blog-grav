@@ -1,6 +1,14 @@
 ---
 title: 'Setup docker + reverse proxy pour indie dev'
 date: '06-03-2018 14:30'
+taxonomy:
+    categories:
+        - Tech
+    technologies:
+        - Docker
+        - Nginx
+        - 'Let''s Encrypt'
+header_image: '0'
 ---
 
 ## Objectifs
@@ -18,7 +26,8 @@ Les recettes sont à base de docker-compose (je pars du principe que vous savez 
 Créez-vous un utilisateur (n'utilisez jamais `root` pour vos applications). Pensez à noter l'UID et le GID, ça nous sera utile un peu plus loin.
 
 Notre arboresence se déterminera comme suit:
-<pre>
+
+```bash
 $ tree ~
 /home/your_user
 └── docker
@@ -34,7 +43,7 @@ $ tree ~
         │   └── config.conf
         └── service2
             └── env.ini
-</pre>
+```
 
 On sépare les dossiers `images` et `volumes`:
 * `images` contiendra les docker compose, les variables d'environement, d'autres fichiers pouvant être versionnés, etc.
@@ -52,6 +61,10 @@ Path: ~/docker/images/reverseproxy/docker-compose.yml
 
 ```yaml
 version: '3'
+
+networks:
+  reverseproxy:
+     driver: "bridge"
 
 services:
   nginx-proxy:
@@ -81,13 +94,34 @@ services:
         - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
         - "reverseproxy"
+```
 
+#### Explications
+```yaml
 networks:
   reverseproxy:
      driver: "bridge"
 ```
+On déclare un network qui sera **partagé** avec d'autres containers (de manière non-implicite cependant)
 
-#### Explications: todo
+```yaml
+    ports:
+        - "80:80"
+        - "443:443"
+```
+Notre reverse proxy est notre point d'entrée principal, on mappe donc les ports 80 et 443 du host dessus. Vous ne pourrez donc pas mapper une deuxième fois les ports 80 et 443 du host, mais c'est tout le but du reverse proxy ...
+Le port 80 reste indispensable pour Let's Encrypt.
+
+```yaml
+    labels:
+        - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+```
+C'est ce qui fait le lien avec *nginx-proxy-companion*. Si vous n'avez pas besoin de Let's Encrypt (j'espère quand même que vous n'exposerez pas vos services de prod en http), vous pouvez virer cette ligne, ainsi que le service *nginx-proxy-companion*.
+
+```yaml
+ nginx-proxy-companion:
+```
+C'est le petit container magique qui va générer et regénérer automatiquement vos certificats ssl. Notez bien sûr que pendant le renouvellement, votre application sera **indisponible**, car Let's Encrypt a besoin de dialoguer avec le reverse proxy pour vérifier que votre domaine est bien mappé sur votre serveur.
 
 ### Setup d'un autre service (par exemple, une stack nginx/php toute simple)
 
@@ -95,6 +129,12 @@ networks:
 
 ```yaml
 version: '3'
+
+networks:
+  reverseproxy:
+    external:
+      name: "reverseproxy_reverseproxy"
+
 services:
   web:
     image: nginx
@@ -121,11 +161,46 @@ services:
       - "./volumes/sources:/mnt/sources"
     networks:
       - "default"
+```
 
+#### Explications
+
+```yaml
 networks:
   reverseproxy:
     external:
       name: "reverseproxy_reverseproxy"
 ```
+On importe le network qu'on a créé dans notre docker compose précédent. Le nom est `reverseproxy_reverseproxy` parce que le `docker-compose.yml` de mon reverse proxy se trouve dans le dossier `reverseproxy` (en remplacement de `service1` dans l'arborescence exemple) et parce que la clé de la définition du network dans ce même fichier est `reverseproxy`. A vous d'adapter en conséquence si vous modifier ces valeurs.
+Cela veut également dire qu'il vaudrait mieux lancer votre reverse proxy `docker-compose up -d` avant de lancer vos autres services, au moins une fois, histoire de créer le network.
 
-#### Explications: todo
+```yaml
+  environment:
+      - VIRTUAL_HOST=domain.com
+      - LETSENCRYPT_HOST=domain.com
+      - LETSENCRYPT_EMAIL=mail@domain.com
+```
+Ahhh, on arrive enfin à la partie croustillante (tout ça pour ça !).
+
+La variable `VIRTUAL_HOST` sera hookée par le reverse proxy pour TOUS les containers qui l'auront définie. C'est possible grâce à l'API docker parce qu'on a partagé le socket docker du host dans le container du reverse proxy:
+
+```yaml
+    volumes:
+        - "/var/run/docker.sock:/tmp/docker.sock:ro"
+```
+
+Ce hook va s'opérer lors du démarrage du container du reverse proxy, mais aussi lors du démarrage d'un container contenant cette variable d'environement. Ce qui veut dire que vous n'avez pas à redémarrer le reverse proxy à chaque création de service.
+![Génial](pseb.jpg) Oh pu**** c'est génial. 
+
+Vous pouvez bien sûr mettre un sous domaine, et même plusieurs domaines, en les séparant par des `,` virgules. Le contenu de `LETSENCRYPT_HOST` doit être identique à celui de `VIRTUAL_HOST` (sauf si certains domaines/sous-domaines ne doivent pas être soumis à Let's Encrypt). `LETSENCRYPT_EMAIL`, c'est l'adresse email qui sera associée aux certificats générés. Il me semble qu'avec des virgules et si votre container est en domaines multiples, vous pouvez donner des adresses email différentes pour vos différents domaines, mais j'ai jamais testé. `LETSENCRYPT_HOST` et `LETSENCRYPT_EMAIL` sont bien sûr optionnels (genre, sur une machine de dev, vous en voulez pas).
+
+```yaml
+  networks:
+      - "default"
+      - "reverseproxy"
+```
+Il faudra mettre le network `reverseproxy` (ou le petit nom que vous lui aurez donné si vous le changez) partout où une variable d'environnement `VIRTUAL_HOST` est définie. Quant au network "default", il s'agit du nom du network qui est normalement mis en place pour tous les services définis dans un `docker-compose.yml`, donc histoire de pas perdre cette feature, il faut le remettre (sinon plus de communcation entre vos containers).
+
+Notez que le network `reverseproxy` n'a pas été mis sur le service `php`, il n'en a pas besoin.
+
+Avec ce setup cependant, vos containers communiquent en **HTTP** avec le reverse proxy (port 80 donc), il peut s'agit d'un problème de sécurité si vous êtes absolument psychopathe.

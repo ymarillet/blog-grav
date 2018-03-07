@@ -132,7 +132,7 @@ session:
   enabled: true
   initialize: true
   timeout: 1800
-  name: grav-site
+  name: ymarillet-ninja
   secure: false
   httponly: true
   split: true

@@ -4,8 +4,8 @@ author:
   name: 'Yohann M.'
   email: yohann.marillet@gmail.com
 taxonomies:
-  - category
-  - tag
+  - categories
+  - technologies
 metadata:
   description: 'Bienvenue sur mon blog tech & lifestyle ymarillet.ninja, partage de connaissances'
 summary:
