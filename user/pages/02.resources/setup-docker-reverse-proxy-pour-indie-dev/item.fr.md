@@ -1,15 +1,14 @@
 ---
 title: 'Setup docker + reverse proxy pour indie dev'
+date: '06-03-2018 14:30'
 ---
-
-# {{page.title}}
 
 ## Objectifs
 Vous êtes un développeur. Vous êtes bidouilleur. Vous voulez vous monter votre propre ferme de micro services (soit parce que vous êtes trop parano pour utiliser les services qui existent potentiellement déjà en SaaS, soit pour acquérir une expérience dans le domaine, soit ... bref, vous avez vos raisons.), sauf que, vous êtes tout seul, pauvre petit développeur, et vous vous êtes vite rendu compte que ça nécessitait pas mal d'investissement sur votre temps de loisir.
 
 Je ne prétends pas être un maître dans l'art subtil qu'est la containerisation, par contre je vous donne un petit setup efficace pour monter vos stacks techniques et exposer facilement n'importe quel service ayant une interface web (protocole http(s)), avec certificats Let's Encrypt générés et renouvellés automatiquement, histoire que vous puissiez vous concentrer sur ce qui est réelement important pour vous: le DEV !
 
-Un des autres objectifs est de pouvoir migrer tout votre serveur sans trop de difficult; tous les 2/3 ans, les fermes de serveurs se renouvellent, et donc on vous prévient gentiement 3 à 6 mois à l'avance que votre serveur dédié/mutualisé va finir à la poubelle, même si on vous proposera un serveur de la meme gamme derrière, n'empêche que si vous vous bougez pas le fion, vous allez tout perdre.
+Un des autres objectifs est de pouvoir migrer tout votre serveur sans trop de difficulté puisque tous les 2/3 ans, les fermes de serveurs se renouvellent, et donc on vous prévient gentiement 3 à 6 mois à l'avance que votre serveur dédié/mutualisé va finir à la poubelle, même si on vous proposera un serveur de la meme gamme derrière, n'empêche que si vous vous bougez pas le fion, vous allez tout perdre.
 
 ## Architecture
 On part sur une architecture single serveur (ben oui, en tant que pauvre petit dév, vous avez pas beaucoup de moyen, ou alors vous êtes proche de votre compte en banque), je n'ai pas encore expérimenté le clustering (j'en ai pas encore eu le besoin.)
@@ -38,7 +37,7 @@ $ tree ~
 </pre>
 
 On sépare les dossiers `images` et `volumes`:
-* `images` contiendra les docker compose, les variables d'environement, d'autre fichiers pouvant être versionnés, etc.
+* `images` contiendra les docker compose, les variables d'environement, d'autres fichiers pouvant être versionnés, etc.
 * `volumes` contiendra les données persistantes pour vos containers
 
 On centralise tous les volumes dans un seul dossier, comme ça vous pouvez faire un point de montage, une partition différente, etc. Ca permet aussi un gain de temps lors d'une migration de serveur.
