@@ -1,3 +1,21 @@
+# v1.4.0-rc.2
+## 02/15/2018
+
+1. [](#new)
+    * Added new `Collection::toExtendedArray()` method that's particularly useful for Json output of data
+    * Added new `|yaml_encode` and `|yaml_decode` Twig filter to convert to and from YAML
+    * Added new `read_file()` Twig function to allow you to load and display a file in Twig (Supports streams and regular paths)
+    * Added a new `Medium::exists()` method to check for file existence
+1. [](#improved)
+    * Better `Page.collection()` filtering support including ability to have non-published pages in collections
+    * Stopped Chrome from auto-completing admin user profile form [#1847](https://github.com/getgrav/grav/issues/1847)
+    * Support for empty `switch` field like a `checkbox`
+1. [](#bugfix) 
+    * Properly validate YAML blueprint fields so admin can save as proper YAML now  [addresses many issues]   
+    * Fixed OpenGraph metatags so only Twitter uses `name=`, and all others use `property=` [#1849](https://github.com/getgrav/grav/issues/1849)
+    * Fixed an issue with `evaluate()` and `evaluate_twig()` Twig functions that throws invalid template error
+    * Fixed issue with `|sort_by_key` twig filter if the input was null or not an array
+
 # v1.4.0-rc.1
 ## 01/22/2018
 
