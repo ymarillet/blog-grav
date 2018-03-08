@@ -33,6 +33,11 @@ RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 RUN "date"
 
 # Type docker-php-ext-install to see available extensions
-RUN docker-php-ext-install zip intl json fileinfo gd iconv mbstring sockets hash curl bcmath ctype
+RUN docker-php-ext-configure gd \
+            --with-gd \
+            --with-freetype-dir=/usr/include/ \
+            --with-png-dir=/usr/include/ \
+            --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install zip intl json fileinfo gd iconv mbstring sockets hash curl bcmath ctype
 
 WORKDIR /opt/sources

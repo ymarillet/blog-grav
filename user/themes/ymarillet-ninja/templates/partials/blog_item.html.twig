@@ -1,6 +1,6 @@
 <div class="list-item">
 
-    {% set header_image = page.header.header_image|defined(true) %}
+    {% set header_image = (true == page.header.header_image|defined(true)) %}
     {% set header_image_width  = page.header.header_image_width|defined(900) %}
     {% set header_image_height = page.header.header_image_height|defined(300) %}
     {% set header_image_file = page.header.header_image_file %}
@@ -27,10 +27,10 @@
             {% endfor %}
         </div>
         {% endif %}
-        {% if big_header %}
-            {{ page.media.images|first.cropResize(900,600).html('','blog-header-image') }}
-        {% else %}
-            {% if header_image %}
+        {% if header_image %}
+            {% if big_header %}
+                {{ page.media.images|first.cropResize(900,600).html('','blog-header-image') }}
+            {% else %}
                 {% if header_image_file %}
                     {% set header_image_media = page.media.images[header_image_file] %}
                 {% else %}
@@ -45,8 +45,8 @@
 
     {% if page.header.continue_link|default(false) is same as(false) %}
         <p>{{ page.content }}</p>
-        {% if not truncate %}
-        {% set show_prev_next = true %}
+        {% if not truncate and show_prev_next is not defined %}
+            {% set show_prev_next = true %}
         {% endif %}
     {% elseif truncate and page.summary != page.content %}
         <p>{{ page.summary }}</p>
@@ -56,10 +56,12 @@
         <p><a href="{{ page.url }}">{{ "CONTINUE_READING"|t }}</a></p>
     {% else %}
         <p>{{ page.content }}</p>
-        {% set show_prev_next = true %}
+        {% if show_prev_next is not defined %}
+            {% set show_prev_next = true %}
+        {% endif %}
     {% endif %}
 
-    {% if show_prev_next %}
+    {% if show_prev_next|default(false) %}
 
         <p class="text-center">
             {% if not page.isFirst %}
