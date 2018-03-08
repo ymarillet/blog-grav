@@ -2,7 +2,9 @@ version: "3.2"
 
 services:
   nginx:
-    env_file: nginx/.env
+    env_file:
+      - nginx/.env
+      - .env
     image: nginx:alpine
     restart: unless-stopped
     volumes:
@@ -14,6 +16,8 @@ services:
       - "default"
 
   php:
+    env_file:
+      - .env
     build: ./php
     restart: unless-stopped
     volumes:
@@ -23,6 +27,8 @@ services:
     user: "${UID}:${GID}"
 
   cli:
+    env_file:
+      - .env
     build: ./php
     restart: "no"
     volumes:
