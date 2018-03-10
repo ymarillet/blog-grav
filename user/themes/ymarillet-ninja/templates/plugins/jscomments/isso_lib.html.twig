@@ -15,4 +15,4 @@
         data-isso-vote="{{ vote.enabled ? 'true' : 'false' }}"
         data-vote-levels="{{ vote.levels|join(' ') }}"
 
-        src="{{ host|trim('/')|e('html_attr') }}/js/{{ show_count ? 'count.min.js' : 'embed.min.js' }}"></script>
+        src="//{{ host|trim('/')|e('html_attr') }}/js/{{ show_count ? 'count.min.js' : 'embed.min.js' }}"></script>
