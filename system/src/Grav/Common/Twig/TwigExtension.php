@@ -13,11 +13,12 @@ use Grav\Common\Page\Collection;
 use Grav\Common\Page\Media;
 use Grav\Common\Twig\TokenParser\TwigTokenParserScript;
 use Grav\Common\Twig\TokenParser\TwigTokenParserStyle;
+use Grav\Common\Twig\TokenParser\TwigTokenParserSwitch;
 use Grav\Common\Twig\TokenParser\TwigTokenParserTryCatch;
+use Grav\Common\Twig\TokenParser\TwigTokenParserMarkdown;
 use Grav\Common\Utils;
 use Grav\Common\Markdown\Parsedown;
 use Grav\Common\Markdown\ParsedownExtra;
-use Grav\Common\Uri;
 use Grav\Common\Helpers\Base32;
 use RocketTheme\Toolbox\ResourceLocator\UniformResourceLocator;
 use Symfony\Component\Yaml\Yaml;
@@ -69,7 +70,7 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             new \Twig_SimpleFilter('fieldName', [$this, 'fieldNameFilter']),
             new \Twig_SimpleFilter('ksort', [$this, 'ksortFilter']),
             new \Twig_SimpleFilter('ltrim', [$this, 'ltrimFilter']),
-            new \Twig_SimpleFilter('markdown', [$this, 'markdownFilter']),
+            new \Twig_SimpleFilter('markdown', [$this, 'markdownFunction']),
             new \Twig_SimpleFilter('md5', [$this, 'md5Filter']),
             new \Twig_SimpleFilter('base32_encode', [$this, 'base32EncodeFilter']),
             new \Twig_SimpleFilter('base32_decode', [$this, 'base32DecodeFilter']),
@@ -157,6 +158,8 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             new TwigTokenParserTryCatch(),
             new TwigTokenParserScript(),
             new TwigTokenParserStyle(),
+            new TwigTokenParserMarkdown(),
+            new TwigTokenParserSwitch(),
         ];
     }
 
@@ -252,8 +255,8 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
                 return $items[$remainder];
             }
 
-            return $items[0];
-        }
+                return $items[0];
+            }
 
         return $remainder;
     }
@@ -296,10 +299,10 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
                 return $inflector->$action($data, $count);
             }
 
-            return $inflector->$action($data);
-        }
+                return $inflector->$action($data);
+            }
 
-        return $data;
+            return $data;
     }
 
     /**
@@ -520,7 +523,7 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             return "{$tense}";
         }
 
-        return "$difference $periods[$j] {$tense}";
+            return "$difference $periods[$j] {$tense}";
     }
 
     /**
@@ -543,7 +546,7 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
      * @param bool $block  Block or Line processing
      * @return mixed|string
      */
-    public function markdownFilter($string, $block = true)
+    public function markdownFunction($string, $block = true)
     {
         $page     = $this->grav['page'];
         $defaults = $this->config->get('system.pages.markdown');
@@ -596,7 +599,7 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     public function definedDefaultFilter($value, $default = null)
     {
         return null !== $value ? $value : $default;
-    }
+        }
 
     /**
      * @param      $value
@@ -680,7 +683,7 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     public function urlFunc($input, $domain = false)
     {
         return Utils::url($input, $domain);
-    }
+        }
 
     /**
      * This function will evaluate Twig $twig through the $environment, and return its results.
@@ -696,6 +699,7 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 
         $template = $env->createTemplate($twig);
         return $template->render($context);
+;
     }
 
     /**
@@ -819,9 +823,9 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             return array($key => $val);
         }
 
-        $current_array[$key] = $val;
-        return $current_array;
-    }
+            $current_array[$key] = $val;
+            return $current_array;
+        }
 
     /**
      * Wrapper for array_intersect() method
@@ -852,8 +856,8 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             return json_encode($value);
         }
 
-        return $value;
-    }
+            return $value;
+        }
 
     /**
      * Translate a string
@@ -1022,10 +1026,10 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
                         return $exif_data->getRawData();
                     }
 
-                    return $exif_data->getData();
+                        return $exif_data->getData();
+                    }
                 }
             }
-        }
 
         return null;
     }
@@ -1047,7 +1051,7 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 
         if (file_exists($filepath)) {
             return file_get_contents($filepath);
-        }
+    }
 
         return false;
     }
@@ -1121,11 +1125,14 @@ class TwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
      * Get a theme variable
      *
      * @param $var
+     * @param bool $default
      * @return string
      */
-    public function themeVarFunc($var)
+    public function themeVarFunc($var, $default = null)
     {
-        return $this->config->get('theme.' . $var, false) ?: '';
+        $header = $this->grav['page']->header();
+        $header_classes = isset($header->$var) ? $header->$var : null;
+        return $header_classes ?: $this->config->get('theme.' . $var, $default);
     }
 
     /**

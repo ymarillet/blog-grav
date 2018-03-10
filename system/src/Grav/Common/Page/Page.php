@@ -1109,7 +1109,7 @@ class Page
      */
     public function toYaml()
     {
-        return Yaml::dump($this->toArray(), 10);
+        return Yaml::dump($this->toArray(), 20);
     }
 
     /**
@@ -2495,7 +2495,7 @@ class Page
 
         if ($process_taxonomy) {
             foreach ((array)$config->get('site.taxonomies') as $taxonomy) {
-                if ($uri->param($taxonomy)) {
+                if ($uri->param(rawurlencode($taxonomy))) {
                     $items = explode(',', $uri->param($taxonomy));
                     $collection->setParams(['taxonomies' => [$taxonomy => $items]]);
 

@@ -74,5 +74,9 @@
         </p>
     {% endif %}
 
+    {% if config.plugins.jscomments.enabled %}
+        {{ jscomments('isso', {show_count: show_nb_comments|default(false)})|raw }}
+    {% endif %}
+
     </div>
 </div>

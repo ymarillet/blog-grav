@@ -203,4 +203,4 @@ Il faudra mettre le network `reverseproxy` (ou le petit nom que vous lui aurez d
 
 Notez que le network `reverseproxy` n'a pas été mis sur le service `php`, il n'en a pas besoin.
 
-Avec ce setup cependant, vos containers communiquent en **HTTP** avec le reverse proxy (port 80 donc), il peut s'agit d'un problème de sécurité si vous êtes absolument psychopathe.
+Avec ce setup cependant, vos containers communiquent en **HTTP** avec le reverse proxy (port 80 par défaut donc, ou vous pouvez aussi définir la variable d'environement `VIRTUAL_PORT`), il peut s'agir d'un problème de sécurité si vous êtes absolument psychopathe.

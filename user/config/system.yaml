@@ -17,7 +17,7 @@ languages:
   translations_fallback: false
   session_store_active: false
   http_accept_language: true
-  override_locale: true
+  override_locale: false
 home:
   alias: /blog
   hide_in_urls: false

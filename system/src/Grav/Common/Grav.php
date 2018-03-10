@@ -39,8 +39,7 @@ class Grav extends Container
         'uri'                     => 'Grav\Common\Uri',
         'events'                  => 'RocketTheme\Toolbox\Event\EventDispatcher',
         'cache'                   => 'Grav\Common\Cache',
-        'session'                 => 'Grav\Common\Session',
-        'Grav\Common\Service\MessagesServiceProvider',
+        'Grav\Common\Service\SessionServiceProvider',
         'plugins'                 => 'Grav\Common\Plugins',
         'themes'                  => 'Grav\Common\Themes',
         'twig'                    => 'Grav\Common\Twig\Twig',
@@ -449,10 +448,11 @@ class Grav extends Container
         $supported_types = $config->get('media.types');
 
         // Check whitelist first, then ensure extension is a valid media type
-        if (!empty($fallback_types) && !in_array($uri_extension, $fallback_types)) {
-            return;
-        } elseif (!array_key_exists($uri_extension, $supported_types)) {
-            return;
+        if (!empty($fallback_types) && !\in_array($uri_extension, $fallback_types, true)) {
+            return false;
+        }
+        if (!array_key_exists($uri_extension, $supported_types)) {
+            return false;
         }
 
         $path_parts = pathinfo($path);

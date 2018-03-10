@@ -1,0 +1,18 @@
+{# @see https://posativ.org/isso/docs/configuration/client/ #}
+<script data-isso="//{{ host|e('html_attr') }}/"
+        data-isso="{{ language|e('html_attr') }}"
+
+        data-isso-css="{{ builtin_css ? 'true' : 'false' }}"
+        data-isso-reply-to-self="{{ reply_to_self ? 'true' : 'false' }}"
+        data-isso-require-author="{{ require.author ? 'true' : 'false' }}"
+        data-isso-require-email="{{ require.email ? 'true' : 'false' }}"
+        data-isso-max-comments-top="{{ comments.number == -1 ? 'inf' : comments.number }}"
+        data-isso-max-comments-nested="{{ comments.nested_number == -1 ? 'inf' : comments.nested_number }}"
+        data-isso-reveal-on-click="{{ comments.reveal ? 'true' : 'false' }}"
+        data-isso-avatar="{{ avatar.enabled ? 'true' : 'false' }}"
+        {% if avatar.background %}data-isso-avatar-bg="{{ avatar.background }}"{% endif %}
+        {% if avatar.foreground %}data-isso-avatar-fg="{{ avatar.foreground }}"{% endif %}
+        data-isso-vote="{{ vote.enabled ? 'true' : 'false' }}"
+        data-vote-levels="{{ vote.levels|join(' ') }}"
+
+        src="{{ host|trim('/')|e('html_attr') }}/js/{{ show_count ? 'count.min.js' : 'embed.min.js' }}"></script>

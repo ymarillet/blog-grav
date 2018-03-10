@@ -8,3 +8,82 @@ fr:
   THEME_COPYRIGHT: 'Theme Bootstrap avec modifications maison pour %s'
   NEXT_POST: 'Billet suivant'
   PREVIOUS_POST: 'Billet précédent'
+
+  PLUGINS:
+    JS_COMMENTS:
+      PLUGIN_NAME: 'JSComments'
+      PLUGIN_STATUS: 'Statut du plugin'
+      PLUGIN_ACTIVE: 'Actif'
+      PLUGIN_ACTIVE_HELP: 'Cette option est utilisée pour (dés-)activer le plugin page par page.'
+
+      NONE_SELECTED: '- Aucun sélectionné -'
+      USE_DEFAULT: '- Par défaut -'
+
+      OVERRIDE:
+        PAGE_TITLE: 'Surcharger le titre de la page'
+        PAGE_URL: 'Surcharger l''url de la page'
+        PAGE_ID: 'Surcharger l''ID de la page'
+
+      POWERED_BY: 'Commentaires via <span>%s</span>'
+      COMMENTS: 'Commentaires'
+
+      PROVIDERS:
+        TITLE: 'Fournisseur'
+        TITLE_SETTINGS: 'Paramètres du fournisseur'
+        HELP: 'Veuillez choisir un système de commentaires.'
+
+        ISSO:
+          TITLE: 'Isso'
+          NOSCRIPT: 'Vous devez activer JavaScript pour voir les <a href="https://posativ.org/isso/" rel="nofollow noopener noreferrer">commentaires par Isso.</a>'
+          COPYRIGHT: '<a href="https://posativ.org/isso/" rel="nofollow noopener noreferrer">Commentaires par <span>Isso</span>.</a>'
+
+          FIELDS:
+            HOST: 'URL d''Isso'
+            HOST_HELP: 'L'' URL vers le système de commentaires Isso.'
+            HOST_PLACEHOLDER: 'http://isso.example.com/'
+
+            COUNT: 'Montrer le nombre de commentaires'
+            DEFAULT_LANGUAGE: 'Langue par défaut'
+            DEFAULT_LANGUAGE_HELP: 'Charge les commentaires Google+ dynamiquement en languages différents page par page.'
+            DEFAULT_LANGUAGE_PLACEHOLDER: 'en'
+
+            BUILTIN_CSS: 'Utiliser la feuille de style distante'
+            BUILTIN_CSS_HELP: 'Mettre à "non" empêche Isso d''ajouter sa feuille de style automatiquement.'
+
+            REPLY_TO_SELF: 'Répondre à soi-même'
+            REPLY_TO_SELF_HELP: 'Mettre à "oui" quand "spam guard" est configuré avec "reply-to-self = true".'
+
+            REQUIRE:
+              LABEL: 'Obligatoire'
+              AUTHOR: 'Nom de l''auteur'
+              EMAIL: 'Email de l''auteur'
+
+            COMMENTS:
+              LABEL: 'commentaires'
+              NUMBER_LABEL: 'Commentaires de premier niveau'
+              NUMBER_HELP: 'Nombre de commentaires de premier niveau à montrer par défaut. Mettre à "-1" pour tout voir, ou "0" tout cacher.'
+
+              NESTED_LABEL: 'Commentaires imbriqués'
+              NESTED_HELP: 'Nombre de commentaires imbriqués à montrer par défaut. Mettre à "-1" pour tout voir, ou "0" tout cacher.'
+
+              REVEAL_LABEL: 'Révéler sur clic'
+              REVEAL_HELP: 'Nombre de commentaires à révéler lors du clic sur le lien "X de plus".'
+
+            AVATAR:
+              LABEL: 'Avatar'
+              HELP: 'Active ou non la génération d''avatar.'
+
+              BG_COLOR: 'Couleur de fond'
+              BG_COLOR_HELP: 'Change la couleur de fond de l''avatar. Accepte toutes les couleurs CSS.'
+
+              FG_COLOR: 'Couleur de premier plan'
+              FG_COLOR_HELP: 'Change la couleur de premier plan de l''avatar. Accepte toutes les couleurs CSS.'
+
+            VOTE:
+              LABEL: 'Voter'
+              HELP: 'Active ou non la fonctionnalité de vote au niveau du client.'
+
+              LEVELS_LABEL: 'Niveaux de vote'
+              LEVELS_HELP: 'Liste des niveaux de vote utilisés pour personnaliser la visibilité des commentaires basé sur leur score.'
+              LEVELS_DESCRIPTION: 'Accepte les valeurs séparés par des virgules (e.g., "0,5,10,25,100") ou un tableau JSON (e.g., "[-5,5,15]").'
+              LEVELS_PLACEHOLDER: 'e.g., "-5,5"'

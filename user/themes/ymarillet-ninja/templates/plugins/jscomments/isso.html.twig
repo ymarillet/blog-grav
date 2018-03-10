@@ -1,0 +1,26 @@
+{#
+   Isso - a commenting server similar to Disqus
+   @see https://posativ.org/isso/docs/quickstart/
+ #}
+{% if language is not defined and grav.language.enabled %}
+    {% set language = grav.language.getLanguage %}
+{% endif %}
+
+{% if lib_only|default(false) %}
+    {% include('plugins/jscomments/isso_lib.html.twig') %}
+{% else %}
+<div id="jscomments">
+    {% if show_count %}
+        {# @see https://posativ.org/isso/docs/extras/advanced-integration/ #}
+        <a href="{{ url|default(page.url(true, true))|e('html_attr') }}#isso-thread">{{ 'PLUGINS.JS_COMMENTS.COMMENTS'|t|default('Comments') }}</a>
+    {% else %}
+        {# Embed Isso Thread #}
+        <section id="isso-thread" data-title="{{ title|default(page.title)|e('js') }}"></section>
+        {% if include_lib|default(true) %}
+            {% include('plugins/jscomments/isso_lib.html.twig') %}
+        {% endif %}
+        <noscript>{{ 'PLUGINS.JS_COMMENTS.PROVIDERS.ISSO.NOSCRIPT'|t|raw }}</noscript>
+        {{ 'PLUGINS.JS_COMMENTS.PROVIDERS.ISSO.COPYRIGHT'|t|raw }}
+    {% endif %}
+</div>
+{% endif %}
