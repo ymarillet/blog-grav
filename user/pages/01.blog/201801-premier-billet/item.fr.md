@@ -23,13 +23,13 @@ Pour l'instant, ça fait un peu "gros paté", j'avoue. Faudra que je rajoute du 
 Il va aussi falloir que je bosse sur le design et fonctionnalités du blog:
 
 * ~~Changer le templating du site~~ c'est fait 😀 (ou à peu près)
-* Ajouter un système de commentaires (Disqus ?)
+* ~~Ajouter un système de commentaires (Disqus ?)~~ N'ayant pas (encore) réussi à installer [Discourse](https://www.discourse.org/), j'ai choisi [Isso](https://posativ.org/isso/)
 * Ajouter des pages statiques (about me, tout ça tout ça)
 * ~~Ajouter des tags cohérents pour s'y retrouver (enfin, si je continue à écrire des choses ...)~~ Ca se fera au fur et à mesure ...
 * Si vous avez des idées, n'hésitez pas à m'en faire part !
-  * Et comment on fait, t'as pas de système de commentaires !
+  * ~~Et comment on fait, t'as pas de système de commentaires !~~
      * Gné, j'ai un email. T'auras qu'à regarder la page About me. Quand je l'aurai créée.
 
 Un prochain article: pourquoi j'ai choisi Grav ~~et mes galères avec Netlify~~ (il aurait fallu que je créé cet article tout de suite, je poissonrougis l'épisode Netlify.)
 
-MAJ 07/03/2018
+MAJ 07/03/2018, 10/03/2018
