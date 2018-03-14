@@ -13,6 +13,9 @@
             {% do assets.add('theme://css/font-awesome.min.css',99) %}
             {% do assets.add('theme://css-compiled/theme.css',98) %}
             {% do assets.add('theme://css-compiled/theme/langswitcher.css',97) %}
+            {% if config.plugins.prism.enabled|default(false) %}
+                {% do assets.add('theme://css/prism-plugins.css') %}
+            {% endif %}
         {% endblock %}
         {{ assets.css() }}
 
@@ -23,6 +26,10 @@
             {% if browser.getBrowser == 'msie' and browser.getVersion >= 8 and browser.getVersion <= 9 %}
                 {% do assets.add('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') %}
                 {% do assets.add('theme://js/html5shiv-printshiv.min.js') %}
+            {% endif %}
+
+            {% if config.plugins.prism.enabled|default(false) %}
+                {% do assets.add('theme://js/prism-plugins.js') %}
             {% endif %}
 
         {% endblock %}

@@ -27,7 +27,7 @@ Créez-vous un utilisateur (n'utilisez jamais `root` pour vos applications). Pen
 
 Notre arboresence se déterminera comme suit:
 
-```bash
+```bash {.line-numbers}
 $ tree ~
 /home/your_user
 └── docker
@@ -59,7 +59,7 @@ Le dossier `images` quant à lui, peut être versionné facilement, en 1 ou plus
 #### docker-compose.yml
 Path: ~/docker/images/reverseproxy/docker-compose.yml
 
-```yaml
+```yaml .line-numbers
 version: '3'
 
 networks:
@@ -127,7 +127,7 @@ C'est le petit container magique qui va générer et regénérer automatiquement
 
 #### docker-compose.yml
 
-```yaml
+```yaml .line-numbers
 version: '3'
 
 networks:
