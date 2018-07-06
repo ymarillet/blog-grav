@@ -78,11 +78,33 @@ class Route
     }
 
     /**
+     * @param int $offset
+     * @param int|null $length
      * @return string
      */
-    public function getRoute()
+    public function getRoute($offset = 0, $length = null)
     {
+        if ($offset !== 0 || $length !== null) {
+            return ($offset === 0 ? '/' : '') . implode('/', $this->getRouteParts($offset, $length));
+        }
+
         return '/' . $this->route;
+    }
+
+    /**
+     * @param int $offset
+     * @param int|null $length
+     * @return array
+     */
+    public function getRouteParts($offset = 0, $length = null)
+    {
+        $parts = explode('/', $this->route);
+
+        if ($offset !== 0 || $length !== null) {
+            $parts = array_slice($parts, $offset, $length);
+        }
+
+        return $parts;
     }
 
     /**
@@ -156,7 +178,7 @@ class Route
      */
     public function withGravParam($param, $value)
     {
-        return $this->withParam('gravParams', $param, $value);
+        return $this->withParam('gravParams', $param, null !== $value ? (string)$value : null);
     }
 
     /**
@@ -200,17 +222,16 @@ class Route
     protected function withParam($type, $param, $value)
     {
         $oldValue = isset($this->{$type}[$param]) ? $this->{$type}[$param] : null;
-        $newValue = null !== $value ? (string)$value : null;
 
-        if ($oldValue === $newValue) {
+        if ($oldValue === $value) {
             return $this;
         }
 
         $new = clone $this;
-        if ($newValue === null) {
+        if ($value === null) {
             unset($new->{$type}[$param]);
         } else {
-            $new->{$type}[$param] = $newValue;
+            $new->{$type}[$param] = $value;
         }
 
         return $new;

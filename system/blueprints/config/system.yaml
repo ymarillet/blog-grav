@@ -835,6 +835,8 @@ form:
                         -1: PLUGIN_ADMIN.ERROR_SYSTEM
                         0: PLUGIN_ADMIN.ERROR_SIMPLE
                         1: PLUGIN_ADMIN.ERROR_FULL_BACKTRACE
+                    validate:
+                        type: int
 
 
                 errors.log:
@@ -986,6 +988,18 @@ form:
                     type: hidden
                     label: PLUGIN_ADMIN.ENABLED
                     help: PLUGIN_ADMIN.SESSION_ENABLED_HELP
+                    highlight: 1
+                    options:
+                        1: PLUGIN_ADMIN.YES
+                        0: PLUGIN_ADMIN.NO
+                    default: true
+                    validate:
+                        type: bool
+
+                session.initialize:
+                    type: toggle
+                    label: PLUGIN_ADMIN.SESSION_INITIALIZE
+                    help: PLUGIN_ADMIN.SESSION_INITIALIZE_HELP
                     highlight: 1
                     options:
                         1: PLUGIN_ADMIN.YES
