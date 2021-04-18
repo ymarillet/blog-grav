@@ -1,45 +1,54 @@
 version: "3.2"
 
 services:
-  nginx:
+  ymarillet_ninja_nginx:
     env_file:
-      - nginx/.env
-      - .env
+    - .env
     image: nginx:alpine
     restart: unless-stopped
     volumes:
-      - ./volumes/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./volumes/logs/nginx:/var/log/nginx
-      - ..:/opt/sources:ro
+    - ./volumes/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./volumes/logs/nginx:/var/log/nginx
+    - ..:/opt/sources:ro
     networks:
-      - "reverseproxy"
-      - "default"
+        web:
+        default:
+            aliases:
+            - nginx
+    labels:
+    - "traefik.enable=true"
+    - "traefik.frontend.rule=Host:ymarillet.ninja"    
+    - "traefik.http.routers.ymarilletninja.rule=Host(`ymarillet.ninja`)"    
 
-  php:
+  ymarillet_ninja_php:
     env_file:
-      - .env
+    - .env
     build: ./php
     restart: unless-stopped
     volumes:
-      - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./volumes/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
-      - ..:/opt/sources
+    - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
+    - ./volumes/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
+    - ..:/opt/sources
     user: "${UID}:${GID}"
+    networks:
+        default:
+            aliases:
+            - php
 
-  cli:
+  ymarillet_ninja_cli:
     env_file:
-      - .env
+    - .env
     build: ./php
     restart: "no"
     volumes:
-      - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./volumes/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
-      - ..:/opt/sources
+    - ./volumes/php.ini:/usr/local/etc/php/php.ini:ro
+    - ./volumes/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
+    - ..:/opt/sources
     user: "${UID}:${GID}"
     entrypoint: ''
     command: ["./run.sh"]
 
 networks:
-  reverseproxy:
-    external:
-      name: "reverseproxy_reverseproxy"
+  web:
+    external: true
+  default:
