@@ -1,23 +1,27 @@
 absolute_urls: false
 timezone: Europe/Paris
+default_locale: null
 param_sep: ':'
 wrapped_site: false
 reverse_proxy_setup: false
 force_ssl: false
 force_lowercase_urls: true
-username_regex: '^[a-z0-9_-]{3,16}$'
+custom_base_url: null
+username_regex: '^[A-Za-z0-9_-]{3,16}$'
 pwd_regex: '.{8,}'
 intl_enabled: true
 languages:
   supported:
     - fr
     - en
+  default_lang: fr
   include_default_lang: false
+  pages_fallback_only: false
   translations: true
   translations_fallback: false
   session_store_active: false
   http_accept_language: false
-  override_locale: false
+  override_locale: true
 home:
   alias: /blog
   hide_in_urls: false
@@ -57,7 +61,9 @@ pages:
     - json
     - rss
     - atom
+  append_url_extension: null
   expires: 604800
+  cache_control: null
   last_modified: true
   etag: false
   vary_accept_encoding: false
@@ -71,6 +77,7 @@ pages:
     - .git
     - .idea
   ignore_hidden: true
+  hide_empty_folders: null
   url_taxonomy_filters: true
   frontmatter:
     process_twig: false
@@ -83,11 +90,25 @@ cache:
     method: file
   driver: auto
   prefix: g
+  purge_at: '0 4 * * *'
+  clear_at: '0 3 * * *'
+  clear_job_type: standard
   clear_images_by_default: true
   cli_compatibility: false
   lifetime: 604800
   gzip: false
   allow_webserver_gzip: true
+  redis:
+    socket: null
+    server: null
+    port: null
+    password: null
+  memcache:
+    server: null
+    port: null
+  memcached:
+    server: null
+    port: null
 twig:
   cache: true
   debug: true
@@ -111,8 +132,12 @@ assets:
   collections:
     jquery: 'system://assets/jquery/jquery-2.x.min.js'
 errors:
-  display: '0'
+  display: 0
   log: true
+log:
+  handler: file
+  syslog:
+    facility: local6
 debugger:
   enabled: false
   shutdown:
@@ -124,8 +149,11 @@ images:
   cache_perms: '0755'
   debug: false
   auto_fix_orientation: false
+  seofriendly: false
 media:
   enable_media_timestamp: false
+  unsupported_inline_types: null
+  allowed_fallback_types: null
   auto_metadata_exif: false
   upload_limit: 8388608
 session:
@@ -133,11 +161,20 @@ session:
   initialize: true
   timeout: 1800
   name: ymarillet-ninja
+  uniqueness: path
   secure: false
   httponly: true
   split: true
+  path: null
 gpm:
-  releases: testing
+  releases: stable
+  proxy_url: null
   method: auto
   verify_peer: true
   official_gpm_only: true
+accounts:
+  type: data
+  storage: file
+strict_mode:
+  yaml_compat: true
+  twig_compat: true

@@ -11,6 +11,8 @@ taxonomy:
 header_image: '0'
 ---
 
+MAJ Février 2020: Je vous conseille aujourd'hui de regarder [Traefik](https://docs.traefik.io/) qui fait exactement le même travail mais avec les labels plus travaillés dans les `docker-compose.yaml` et avec une UI pour l'état des containers. Je ferai une mise à jour (ou un nouveau billet) plus détaillé prochainement™ contenant de la configuration.
+
 ## Objectifs
 Vous êtes un développeur. Vous êtes bidouilleur. Vous voulez vous monter votre propre ferme de micro services (soit parce que vous êtes trop parano pour utiliser les services qui existent potentiellement déjà en SaaS, soit pour acquérir une expérience dans le domaine, soit ... bref, vous avez vos raisons.), sauf que, vous êtes tout seul, pauvre petit développeur, et vous vous êtes vite rendu compte que ça nécessitait pas mal d'investissement sur votre temps de loisir.
 
@@ -27,7 +29,7 @@ Créez-vous un utilisateur (n'utilisez jamais `root` pour vos applications). Pen
 
 Notre arboresence se déterminera comme suit:
 
-```bash {.line-numbers}
+```bash
 $ tree ~
 /home/your_user
 └── docker
@@ -59,7 +61,7 @@ Le dossier `images` quant à lui, peut être versionné facilement, en 1 ou plus
 #### docker-compose.yml
 Path: ~/docker/images/reverseproxy/docker-compose.yml
 
-```yaml .line-numbers
+```yaml
 version: '3'
 
 networks:
@@ -127,7 +129,7 @@ C'est le petit container magique qui va générer et regénérer automatiquement
 
 #### docker-compose.yml
 
-```yaml .line-numbers
+```yaml
 version: '3'
 
 networks:

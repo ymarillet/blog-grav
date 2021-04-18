@@ -7,3 +7,11 @@ Vous trouverez sur cette page tous les liens vers les contenus que je vais crée
 ## Tech
 
 * [Setup d'un serveur sur archi Docker, comprenant un reverse proxy vers d'autres services dockerisés](/resources/setup-docker-reverse-proxy-pour-indie-dev)
+
+## Réflexions
+
+* Notre place dans l'Univers
+	* [Introduction](/resources/notre-place-dans-l-univers-introduction)
+
+## Cuisine
+* [Faire son levain maison](/resources/faire-son-levain-maison)

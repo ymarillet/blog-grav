@@ -1,0 +1,5 @@
+enabled: true
+modules:
+  - array
+  - intl
+  - date
